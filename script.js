@@ -1,20 +1,20 @@
-document.getElementById('customerForm').addEventListener('submit', function(event) {
-  event.preventDefault();
-
-  const name = document.getElementById('name').value;
-  const email = document.getElementById('email').value;
-  const phone = document.getElementById('phone').value;
-  const address = document.getElementById('address').value;
-
+document.getElementById("customerForm").addEventListener("submit", function(event) {
+  event.preventDefault(); // Prevents the form from reloading the page
+  
   const customerData = {
-    name: name,
-    email: email,
-    phone: phone,
-    address: address
+      name: document.getElementById("name").value,
+      email: document.getElementById("email").value,
+      phone: document.getElementById("phone").value,
+      address: document.getElementById("address").value
   };
 
-  console.log('Customer Data:', customerData); // Replace this with backend API call to save data
+  // Save data to localStorage
+  let formData = JSON.parse(localStorage.getItem("formData")) || [];
+  formData.push(customerData);
+  localStorage.setItem("formData", JSON.stringify(formData));
 
-  document.getElementById('successMessage').textContent = "Form submitted successfully!";
-  document.getElementById('customerForm').reset();
+  alert("Form data has been saved!");
+
+  // Optionally, clear the form after submission
+  document.getElementById("customerForm").reset();
 });
